@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>List of Recipes</title>
+</head>
+<body>
+
+<div>
+    <h3>Wybierz kategorię:</h3>
+    <a href="/">Wszystkie </a>
+    <div th:each="category:${categories}">
+        <a th:href="|/?categoryId=${category.getId()}|" th:text="${category.getName()}"></a>
+    </div>
+    <br/>
+    <h2>Przepisy</h2>
+    <div style="margin-right: 50%">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Nazwa przepisu</th>
+                <th>Kategoria</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:href="@{/}" th:each="r :${recipes}">
+                <th><a th:href="|/recipe?id=${r.getId()}|"> <img th:src="${r.getImageUrl()}"></a></th>
+                <th><a th:href="|/recipe?id=${r.getId()}|" th:text="${r.getName()}"></a></th>
+                <th th:text="${r.getCategory().getName()}" ></th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
